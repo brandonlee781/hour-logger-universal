@@ -1,0 +1,4 @@
+input QueryOptions {
+  limit: Int
+  offset: Int
+}

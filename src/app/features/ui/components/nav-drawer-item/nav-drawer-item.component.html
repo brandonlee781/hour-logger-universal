@@ -1,0 +1,8 @@
+<mat-list-item 
+  class="item-wrapper" 
+  [ngClass]="{ 'selected': isSelected }"
+  (click)="changeSelected"
+>
+  <mat-icon class="item-icon">{{ icon }}</mat-icon>
+  <span class="item-text">{{ text }}</span>
+</mat-list-item>

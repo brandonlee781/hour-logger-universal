@@ -1,0 +1,16 @@
+type ReportData {
+  number: Int
+  hours: Int
+  rate: Int
+}
+
+type Report {
+  id: ID!
+  date: String
+  type: String
+  logs: [Log]
+  data: ReportData
+  user: User
+  createdAt: String
+  updatedAt: String
+}

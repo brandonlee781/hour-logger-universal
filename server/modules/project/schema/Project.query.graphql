@@ -1,0 +1,18 @@
+type Query {
+  # Get all Projects in the database
+  allProjects: AllProjectsPayload
+  # Get a single Project from the database by its UUID
+  oneProject(input: OneProjectInput!): OneProjectPayload
+}
+
+type AllProjectsPayload {
+  projects: [Project!]!
+}
+
+input OneProjectInput {
+  id: String!
+}
+
+type OneProjectPayload {
+  project: Project!
+}

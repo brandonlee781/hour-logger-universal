@@ -1,0 +1,54 @@
+type Mutation {
+  createClient(input: CreateClientInput!): CreateClientPayload
+  updateClient(input: UpdateClientInput!): UpdateClientPayload
+  deleteClient(input: DeleteClientInput!): DeleteClientPayload
+}
+
+input CreateClientInput {
+  name: String!
+  address: String
+  city: String
+  state: String
+  zip: String
+}
+
+type CreateClientPayload {
+  client: Client
+}
+
+input ClientPatch {
+  name: String
+  address: String
+  city: String
+  state: String
+  zip: String
+}
+
+input UpdateClientInput {
+  id: ID!
+  patch: ClientPatch
+}
+
+type UpdateClientPayload {
+  client: Client
+}
+
+input DeleteClientInput {
+  id: ID!
+}
+
+type DeletedClient {
+  name: String
+  address: String
+  city: String
+  state: String
+  zip: String
+  user: User
+  projects: [Project]
+  createdAt: String
+  updatedAt: String
+}
+
+type DeleteClientPayload {
+  project: DeletedClient
+}

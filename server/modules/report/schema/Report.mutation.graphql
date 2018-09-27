@@ -1,0 +1,22 @@
+type Mutation {
+  createReport(input: CreateReportInput!): CreateReportPayload!
+}
+
+input ReportDataInput {
+  rate: Int
+}
+
+input NewReport {
+  date: String!
+  type: String!
+  logs: [String]
+  data: ReportDataInput
+}
+
+input CreateReportInput {
+  report: NewReport!
+}
+
+type CreateReportPayload {
+  report: Report
+}

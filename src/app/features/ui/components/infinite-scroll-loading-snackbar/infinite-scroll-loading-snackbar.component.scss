@@ -1,0 +1,11 @@
+$size: 24px;
+
+.spinner {
+  height: $size !important;
+  width: $size !important;
+  margin: 0 !important;
+  /deep/ svg {
+    height: $size !important;
+    width: $size !important;
+  }
+}

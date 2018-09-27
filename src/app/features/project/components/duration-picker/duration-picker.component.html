@@ -1,0 +1,17 @@
+<div [ngClass]="{ 'wrapper': true, 'withLabel': showLabel}">
+  <label *ngIf="showLabel" class="label">Estimate</label>
+  <mat-icon class="icon">access_time</mat-icon>
+  <div class="hour-wrapper" [matMenuTriggerFor]="hourMenu">
+    {{ selectedHour }}
+  </div>
+  <mat-menu #hourMenu="matMenu" class="picker-menu">
+    <button *ngFor="let hour of hours" mat-menu-item (click)="setHour(hour)" >{{ hour }}</button>
+  </mat-menu>
+  <span>:</span>
+  <div class="minute-wrapper" [matMenuTriggerFor]="minuteMenu">
+    {{ selectedMinutes }}
+  </div>
+  <mat-menu #minuteMenu="matMenu" class="picker-menu">
+    <button *ngFor="let minute of minutes" mat-menu-item (click)="setMinutes(minute)" >{{ minute }}</button>
+  </mat-menu>
+</div>

@@ -1,0 +1,68 @@
+<div class="dialog-header">
+  <h2>Your Information</h2>
+  <button *ngIf="!confirmLogout" mat-button (click)="confirmLogout = true">
+    <span>Logout</span>
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+  <button *ngIf="confirmLogout" mat-button (click)="logout()">
+    <span>Confirm?</span>
+  </button>
+
+</div>
+
+<div mat-dialog-content class="dialog-content">
+  <form [formGroup]="updateUserForm" class="user-form">
+    <mat-form-field appearance="fill" class="email-field">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="password-field">
+      <mat-label>Password</mat-label>
+      <input matInput #password formControlName="password" type="password">
+      <button matSuffix mat-icon-button (click)="showPassword(password)">
+        <mat-icon *ngIf="password.type === 'password'">visibility</mat-icon>
+        <mat-icon *ngIf="password.type === 'text'">visibility_off</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="passwordConfirm-field">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput #confirmPassword formControlName="confirmPassword" type="password">
+      <button matSuffix mat-icon-button (click)="showPassword(confirmPassword)">
+        <mat-icon *ngIf="confirmPassword.type === 'password'">visibility</mat-icon>
+        <mat-icon *ngIf="confirmPassword.type === 'text'">visibility_off</mat-icon>
+      </button>
+      <mat-error *ngIf="updateUserForm?.controls?.confirmPassword?.errors?.MatchPassword">
+        Passwords do not match
+      </mat-error>
+    </mat-form-field>
+
+    <!-- <h2>Address</h2> -->
+    <mat-form-field appearance="fill" class="address-field">
+      <mat-label>Street Address</mat-label>
+      <input matInput formControlName="address">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="city-field">
+      <mat-label>City</mat-label>
+      <input matInput formControlName="city">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="state-field">
+      <mat-label>State</mat-label>
+      <input matInput formControlName="state">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="zip-field">
+      <mat-label>Zip</mat-label>
+      <input matInput formControlName="zip">
+    </mat-form-field>
+  </form>
+
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button color="primary" [disabled]="!updateUserForm.valid" (click)="updateUser()">Save</button>
+</div>

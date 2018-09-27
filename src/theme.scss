@@ -1,0 +1,18 @@
+@import '~@angular/material/theming';
+@import '~@mat-datetimepicker/core/datetimepicker/datetimepicker-theme.scss';
+@import './sass/variables';
+
+@include mat-core();
+
+$logger-app-primary: mat-palette($logger-blue, 700, 500, 800);
+$logger-app-accent: mat-palette($mat-blue-grey, 500);
+$logger-app-warn: mat-palette($mat-red, 900);
+$logger-app-theme: mat-light-theme(
+  $logger-app-primary,
+  $logger-app-accent,
+  $logger-app-warn
+);
+
+// Using the $theme variable from the pre-built theme you can call the theming function
+@include mat-datetimepicker-theme($logger-app-theme);
+@include angular-material-theme($logger-app-theme);

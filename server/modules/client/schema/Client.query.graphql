@@ -1,0 +1,18 @@
+type Query {
+  # Get all Clients in the database
+  allClients: AllClientsPayload
+  # Get a single Clint from the database by its UUID
+  oneClient(input: OneClientInput!): OneClientPayload
+}
+
+type AllClientsPayload {
+  clients: [Client!]
+}
+
+input OneClientInput {
+  id: String!
+}
+
+type OneClientPayload {
+  client: Client!
+}

@@ -1,0 +1,28 @@
+<div class="project-wrapper">
+  <bl-nav-drawer
+    [loading]="loading"
+    #drawer>
+
+    <div class="nav-header">
+      <span>Projects</span>
+      <button mat-button (click)="showNewProject = true">
+        <span class="mat-body-1">New</span>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div class="nav-links">
+      <bl-nav-drawer-link
+        *ngFor="let link of links"
+        [link]="link"
+      ></bl-nav-drawer-link>
+      <bl-new-project
+        *ngIf="showNewProject"
+        (close)="showNewProject = false">
+      </bl-new-project>
+    </div>
+    <div class="project-content">
+      <router-outlet></router-outlet>
+    </div>
+  </bl-nav-drawer>
+</div>

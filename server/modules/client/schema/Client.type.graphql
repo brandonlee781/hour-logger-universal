@@ -1,0 +1,12 @@
+type Client {
+  id: String!
+  name: String!
+  address: String
+  city: String
+  state: String
+  zip: String
+  user: User
+  projects: [Project]
+  createdAt: String
+  updatedAt: String
+}

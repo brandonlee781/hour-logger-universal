@@ -1,0 +1,68 @@
+type Mutation {
+  createTask(input: CreateTaskInput!): CreateTaskPayload
+  toggleTask(input: ToggleTaskInput!): ToggleTaskPayload
+  updateTask(input: UpdateTaskInput!): UpdateTaskPayload
+  updateTaskParent(input: UpdateTaskParentInput!): UpdateTaskPayload
+  deleteTask(input: DeleteTaskInput!): DeleteTaskPayload
+}
+
+input NewTask {
+  text: String!
+  project: String!
+  estimate: Float
+  priority: Int
+  parent: String
+}
+
+input CreateTaskInput {
+  task: NewTask!
+}
+
+type CreateTaskPayload {
+  task: Task
+}
+
+input ToggleTaskInput {
+  id: String
+}
+
+type ToggleTaskPayload {
+  task: Task
+}
+
+input TaskPatch {
+  text: String
+  estimate: Float
+}
+
+input UpdateTaskInput {
+  id: ID!
+  patch: TaskPatch
+}
+
+input UpdateTaskParentInput {
+  id: ID!
+  parent: ID!
+}
+
+type UpdateTaskPayload {
+  task: Task
+}
+
+input DeleteTaskInput {
+  id: ID!
+}
+
+type DeletedTask {
+  text: String
+  completed: Boolean
+  priority: Int
+  project: Project
+  user: User
+  createdAt: String
+  updatedAt: String
+}
+
+type DeleteTaskPayload {
+  task: DeletedTask
+}

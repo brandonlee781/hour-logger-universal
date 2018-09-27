@@ -1,0 +1,21 @@
+type Query {
+  allReports(options: QueryOptions): AllReportsPayload!
+  allReportsByType(input: AllReportsByTypeInput!, options: QueryOptions): AllReportsPayload! 
+  oneReport(input: OneReportInput!): OneReportPayload!
+}
+
+type AllReportsPayload {
+  reports: [Report!]!
+}
+
+input AllReportsByTypeInput {
+  type: String
+}
+
+input OneReportInput {
+  id: String!
+}
+
+type OneReportPayload {
+  report: Report!
+}

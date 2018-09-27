@@ -1,0 +1,157 @@
+@import 'variables';
+@import 'mixins';;
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.list-item {
+  height: 7rem;
+  width: 100%;
+
+  @include mobile-and-down {
+    height: 4.5rem;
+  }
+}
+
+.log-entry {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 4em;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: #2c3e50;
+
+  @include mobile-and-down {
+    padding: 0 2em;
+  }
+}
+
+.log-data {
+  display: grid;
+  grid-template-rows: 1.5rem 1.5rem;
+  grid-template-columns: 150px 110px 95px 95px 50px;
+
+  @include tablet-and-down {
+    grid-template-columns: 150px 110px 95px 50px;
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 150px 110px 50px;
+  }
+
+  @include mobile-and-down {
+    grid-template-columns: 150px 150px;
+  }
+}
+
+.log-note {
+  width: 100%;
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 5;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include mobile-and-down {
+    width: 300px;
+  }
+}
+
+.log-detail {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+
+  span.detail-value {
+    font-weight: 400;
+    margin-left: 4px;
+    margin-top: 2px;
+    text-overflow: clip;
+    white-space: nowrap;
+  }
+}
+
+.log-project {
+  grid-row: 2 / span 1;
+  grid-column: 1 / span 1;
+}
+
+.log-date {
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 1;
+
+  @include mobile-and-down {
+    display: none;
+  }
+}
+
+.log-date-mobile {
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 1;
+
+  @include tablet-and-up {
+    display: none;
+  }
+}
+
+.log-start {
+  grid-row: 2 / span 1;
+  grid-column: 3 / span 1;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.log-end {
+  grid-row: 2 / span 1;
+  grid-column: 4 / span 1;
+
+  @include tablet-and-down {
+    display: none;
+  }
+}
+
+.log-duration {
+  grid-row: 2 / span 1;
+  grid-column: 5 / span 1;
+
+  @include tablet-and-down {
+    grid-column: 4 / span 1;
+  }
+
+  @media (max-width: 700px) {
+    grid-column: 3 / span 1;
+  }
+
+  @include mobile-and-down {
+    display: none;
+  }
+}
+
+.log-button {
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  min-width: 44px;
+  margin: 0 6px;
+}
+
+.list-item-buttons {
+  width: 84px;
+}

@@ -1,0 +1,65 @@
+type Query {
+  # Get all Logs in the database
+  allLogs(options: QueryOptions): AllLogsPayload!
+  # Get a single Log from the database by its UUID
+  oneLog(input: OneLogInput!): OneLogPayload!
+  # Get all Logs associated with a specific Project by the project's name
+  allLogsByProjectName(
+    input: AllLogsByProjectNameInput!
+    options: QueryOptions
+  ): AllLogsByProjectNamePayload!
+  # Get all Logs associated with a specific Project by the project's UUID
+  allLogsByProjectId(
+    input: AllLogsByProjectIdInput!
+    options: QueryOptions
+  ): AllLogsByProjectIdPayload!
+  # Get all Logs Between two dates. If only one is specified get all logs before or after that date
+  allLogsByDates(
+    input: AllLogsByDateInput!
+    options: QueryOptions
+  ): AllLogsByDatePayload
+}
+
+type AllLogsPayload {
+  logs: [Log!]!
+}
+
+input OneLogInput {
+  id: String!
+}
+
+type OneLogPayload {
+  log: Log!
+}
+
+input AllLogsByProjectNameInput {
+  name: String
+}
+
+type AllLogsByProjectNamePayload {
+  logs: [Log!]!
+}
+
+input AllLogsByProjectIdInput {
+  id: String
+}
+
+type AllLogsByProjectIdPayload {
+  logs: [Log!]!
+}
+
+# Input for allLogsByDate query, all variables are optional but
+# either start or end must be provided, if one is not provided
+# the server will use a default value
+input AllLogsByDateInput {
+  # Beginning date to filter logs, default = 1970-01-01
+  start: String
+  # End date to filter logs, default = 2100-01-01
+  end: String
+  # Optional filter by project name or project id
+  project: [String]
+}
+
+type AllLogsByDatePayload {
+  logs: [Log!]!
+}

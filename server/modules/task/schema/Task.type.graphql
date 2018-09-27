@@ -1,0 +1,13 @@
+type Task {
+  id: ID!
+  text: String
+  completed: Boolean
+  estimate: Float
+  priority: Int
+  parent: Task
+  children: [Task]
+  project: Project
+  user: User
+  createdAt: String
+  updatedAt: String
+}

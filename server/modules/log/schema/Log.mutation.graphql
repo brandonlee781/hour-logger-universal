@@ -1,0 +1,57 @@
+type Mutation {
+  createLog(input: CreateLogInput!): CreateLogPayload
+  updateLog(input: UpdateLogInput!): UpdateLogPayload
+  deleteLog(input: DeleteLogInput!): DeleteLogPayload
+}
+
+input NewLog {
+  start: String!
+  end: String!
+  duration: Float!
+  project: String!
+  note: String!
+}
+
+input CreateLogInput {
+  log: NewLog!
+}
+
+type CreateLogPayload {
+  log: Log
+}
+
+input LogPatch {
+  start: String
+  end: String
+  duration: Float
+  project: String
+  note: String
+}
+
+input UpdateLogInput {
+  id: ID!
+  patch: LogPatch
+}
+
+type UpdateLogPayload {
+  log: Log
+}
+
+input DeleteLogInput {
+  id: ID!
+}
+
+type DeletedLog {
+  start: String
+  end: String
+  duration: Float
+  project: Project
+  user: User
+  note: String
+  createdAt: String
+  updatedAt: String
+}
+
+type DeleteLogPayload {
+  log: DeletedLog
+}

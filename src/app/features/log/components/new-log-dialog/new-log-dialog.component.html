@@ -1,0 +1,95 @@
+<div class="dialog-header">
+  <h2>{{ data.header }}</h2>
+</div>
+<div mat-dialog-content class="dialog-content">
+  <form [formGroup]="newLogForm" class="log-form">
+    <input type="hidden" formControlName="id">
+
+    <mat-form-field appearance="fill" [hideRequiredMarker]="true" class="project-field">
+      <mat-label>Select Project</mat-label>
+      <mat-select #projectSelect formControlName="project" required>
+        <mat-option *ngFor="let project of projects" [value]="project.id">
+          {{ project.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="newLogForm?.errors?.project">
+          {{ newLogForm.errors.project }}
+      </mat-error>
+      <mat-hint>Required *</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [hideRequiredMarker]="true" class="date-field">
+      <mat-label>Date</mat-label>
+      <mat-datetimepicker-toggle [for]="datePicker" matSuffix></mat-datetimepicker-toggle>
+      <mat-datetimepicker #datePicker type="date" openOnFocus="true"></mat-datetimepicker>
+      <input
+        formControlName="date"
+        [matDatetimepicker]="datePicker"
+        matInput
+        required
+        autocomplete="false">
+      <mat-error *ngIf="newLogForm?.errors?.date">
+          {{ newLogForm.errors.date }}
+      </mat-error>
+      <mat-hint>Required *</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [hideRequiredMarker]="true" class="startTime-field">
+      <mat-label>Start Time</mat-label>
+      <mat-datetimepicker-toggle [for]="startTime" matSuffix></mat-datetimepicker-toggle>
+      <mat-datetimepicker #startTime type="time" openOnFocus="true" timeInterval="15"></mat-datetimepicker>
+      <input formControlName="startTime" [matDatetimepicker]="startTime" matInput required autocomplete="false">
+      <mat-error *ngIf="newLogForm?.errors?.startTime">
+          {{ newLogForm.errors.startTime }}
+      </mat-error>
+      <mat-hint>Required *</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [hideRequiredMarker]="true" class="endTime-field">
+      <mat-label>End Time</mat-label>
+      <mat-datetimepicker-toggle [for]="endTimePicker" matSuffix></mat-datetimepicker-toggle>
+      <mat-datetimepicker #endTimePicker type="time" openOnFocus="true" timeInterval="15"></mat-datetimepicker>
+      <input
+        matInput
+        formControlName="endTime"
+        [matDatetimepicker]="endTimePicker"
+        [errorStateMatcher]="endTimeMatcher"
+        required
+        autocomplete="false"
+      >
+      <mat-error>
+          {{ newLogForm.errors && newLogForm.errors.logTime }}
+      </mat-error>
+      <mat-hint>Required *</mat-hint>
+      <mat-hint align="end">Duration: {{ duration }} hours</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [hideRequiredMarker]="true" class="tasks-field">
+      <mat-label *ngIf="!projectTasks || projectTasks.length >= 1">Select Task(s)</mat-label>
+      <mat-label *ngIf="projectTasks && projectTasks.length === 0">No open Tasks</mat-label>
+      <mat-select #taskSelect formControlName="tasks" multiple>
+        <mat-option *ngFor="let task of projectTasks" [value]="task.id">
+          {{ task.text }}: {{ task.estimate }} hours
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="newLogForm?.errors?.tasks">
+          {{ newLogForm.errors.tasks }}
+      </mat-error>
+      <mat-hint *ngIf="!projectSelect.value">You must select a project before you can select any tasks</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [hideRequiredMarker]="true" class="notes-field">
+      <mat-label>Notes</mat-label>
+      <input #notes formControlName="note" matInput maxlength="255" required/>
+      <mat-hint>Required *</mat-hint>
+      <mat-hint align="end">{{ notes.value.length}} / 255</mat-hint>
+    </mat-form-field>
+  </form>
+
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button *ngIf="data.id" mat-button color="primary" (click)="editLog()" [disabled]="!newLogForm.valid">Save</button>
+  <button *ngIf="!data.id" mat-button color="primary" (click)="saveLog()" [disabled]="!newLogForm.valid">Save</button>
+</div>

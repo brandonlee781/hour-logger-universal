@@ -1,0 +1,34 @@
+type Mutation {
+  createInvoice(input: NewInvoice!): CreateInvoicePayload
+  deleteInvoice(input: DeleteInvoiceInput!): DeleteInvoicePayload
+}
+
+input NewInvoice {
+  date: String!
+  hours: Float!
+  rate: Int!
+  logs: [ID!]!
+}
+
+type CreateInvoicePayload {
+  invoice: Invoice!
+}
+
+input DeleteInvoiceInput {
+  id: ID!
+}
+
+type DeletedInvoice {
+  number: Int
+  hours: Float
+  rate: Int
+  date: String
+  logs: [Log!]
+  user: User
+  createdAt: String
+  updatedAt: String
+}
+
+type DeleteInvoicePayload {
+  invoice: DeletedInvoice
+}

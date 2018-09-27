@@ -1,0 +1,56 @@
+/* stylelint-disable selector-pseudo-element-no-unknown */
+@import 'mixins';;
+@import 'variables';
+
+.new-project-form {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 50000;
+  height: 126px;
+  width: 314px;
+  padding: 0 32px;
+  background-color: $primary;
+
+  & ::ng-deep .mat-input-flex.mat-form-field-flex,
+  & ::ng-deep .mat-form-field-wrapper,
+  & ::ng-deep .mat-input-infix,
+  & ::ng-deep .mat-form-field-label-wrapper {
+    height: 40px !important;
+    padding-top: 0;
+    border-top: 0;
+    // top: 0;
+  }
+
+  & ::ng-deep .mat-form-field-label-wrapper label {
+    font-size: 2.15rem !important;
+    top: 0;
+    color: #ddd;
+    font-weight: 100 !important;
+  }
+
+  & ::ng-deep .mat-form-field-underline .mat-form-field-ripple,
+  & ::ng-deep .mat-form-field-underline {
+    background-color: #fff;
+  }
+}
+
+.new-project-field {
+  width: 280px;
+  height: 40px;
+}
+
+#new-project-input {
+  font-size: 2.15rem;
+  font-weight: 100;
+  width: 360px;
+  color: white;
+  margin-top: -30px;
+}
+
+.add-project-btn .mat-icon {
+  color: #fff;
+}

@@ -1,0 +1,19 @@
+type Query {
+  # Get all Invoices from the database
+  allInvoices: AllInvoicesPayload
+  # Get a single Invoice from the database based on invoice ID
+  oneInvoice(input: OneInvoiceInput!): OneInvoicePayload
+}
+
+type AllInvoicesPayload {
+  invoices: [Invoice!]!
+}
+
+input OneInvoiceInput {
+  id: ID
+  number: Int
+}
+
+type OneInvoicePayload {
+  invoice: Invoice!
+}

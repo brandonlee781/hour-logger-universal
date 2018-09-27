@@ -1,0 +1,89 @@
+/* You can add global styles to this file, and also import other style files */
+@import './variables';
+@import './mixins';
+@import '~angular-calendar/css/angular-calendar.css';
+@import '~ng-drag-drop/style.css';
+
+/* Application-wide Styles */
+h1 {
+  color: #369;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+
+h2,
+h3 {
+  color: #444;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+
+body {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0;
+  height: 100vh;
+}
+
+body,
+input[text],
+button {
+  color: #888;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+/* everywhere else */
+* {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+/* calendar styles */
+.cal-month-view {
+  height: 100%;
+  border: 1px solid #ddd;
+
+  .cal-header .cal-cell {
+    border-right: 1px solid #ddd;
+    // border-left: 1px solid #ddd;
+    flex-basis: 14.2857%;
+    max-width: 14.2857%;
+    padding: 0;
+  }
+
+  .cal-days {
+    height: 100%;
+
+    .cal-cell-row {
+      height: 20%;
+    }
+  }
+}
+
+.advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {
+  margin-top: 0 !important;
+}
+
+.spinner {
+  margin: 40px auto;
+}
+
+.nav-header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  height: $sidenav-width;
+  min-height: $sidenav-width;
+  width: calc(378px - 4rem);
+  padding: 0 2rem;
+  margin: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 2.15rem;
+  font-weight: 100;
+  color: #fff;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+
+  button span {
+    margin-right: 6px;
+  }
+}

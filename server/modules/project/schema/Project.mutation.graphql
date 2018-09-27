@@ -1,0 +1,54 @@
+type Mutation {
+  createProject(input: CreateProjectInput!): CreateProjectPayload
+  updateProject(input: UpdateProjectInput!): UpdateProjectPayload
+  toggleProjectFavorite(input: ToggleProjectFavoriteInput!): ToggleProjectFavoritePayload
+  deleteProject(input: DeleteProjectInput!): DeleteProjectPayload
+}
+
+input CreateProjectInput {
+  name: String!
+  color: String
+  client: String
+}
+
+type CreateProjectPayload {
+  project: Project
+}
+
+input ProjectPatch {
+  color: String
+}
+
+input UpdateProjectInput {
+  id: ID!
+  patch: ProjectPatch
+}
+
+type UpdateProjectPayload {
+  project: Project
+}
+
+input ToggleProjectFavoriteInput {
+  id: ID!
+}
+
+type ToggleProjectFavoritePayload {
+  project: Project
+}
+
+input DeleteProjectInput {
+  id: ID!
+}
+
+type DeletedProject {
+  name: String
+  color: String
+  logs: [Log]
+  user: User
+  createdAt: String
+  updatedAt: String
+}
+
+type DeleteProjectPayload {
+  project: DeletedProject
+}

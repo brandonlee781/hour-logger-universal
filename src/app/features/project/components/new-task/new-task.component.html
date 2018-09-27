@@ -1,0 +1,21 @@
+<div *ngIf="selectedProject" class="new-task-panel">
+  <!-- <mat-form-field class="priority-select">
+    <mat-select placeholder="Priority" [formControl]="taskPriority">
+      <mat-option *ngFor="let number of [0,1,2,3,4]" [value]="number">
+        {{ number }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <mat-form-field class="new-task-input">
+    <input matInput [formControl]="taskText" required placeholder="Task Text" (keyup.enter)="createTask()">
+    <mat-error *ngIf="taskText.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <bl-duration-picker
+    class="duration-picker"
+    (handleDuration)="setDuration($event)"
+  ></bl-duration-picker>
+
+  <button mat-raised-button color="primary" (click)="createTask()" [disabled]="taskText.invalid">Create</button>
+</div>

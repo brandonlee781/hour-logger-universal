@@ -1,0 +1,47 @@
+@import 'variables';
+@import 'mixins';;
+
+.project-wrapper {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  width: calc(100vw - 126px);
+  height: 100vh;
+}
+
+.project-content {
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  height: $sidenav-width;
+  padding: 0 4em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+  & .header__title {
+    font-size: 2.5rem;
+    font-weight: 300;
+
+    @include mobile-and-down {
+      font-size: 1.5rem;
+    }
+  }
+
+  & button {
+    margin-right: 12px;
+
+    @include mobile-and-down {
+      margin-right: 0;
+    }
+  }
+
+  @include mobile-and-down {
+    height: $sidenav-width * 0.75;
+    padding: 0 2em;
+  }
+}

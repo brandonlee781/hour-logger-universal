@@ -1,0 +1,64 @@
+<div class="header">
+  <div class="header__title">
+    {{ project?.name }}
+  </div>
+
+  <eco-fab-speed-dial
+    #projectFab
+    [(open)]="open"
+    direction="left"
+    animationMode="fling"
+    [fixed]="true"
+    (mouseenter)="projectFab.open = true"
+    (mouseleave)="projectFab.open = false">
+    <eco-fab-speed-dial-trigger>
+      <button
+        *ngIf="!project?.favorite"
+        mat-fab
+        color="primary"
+        matTooltip="Set as Favorite"
+        (click)="toggleFavorite()">
+        <mat-icon>star_border</mat-icon>
+      </button>
+
+      <button
+        *ngIf="project?.favorite"
+        mat-fab
+        color="primary"
+        matTooltip="Favorited"
+        (click)="toggleFavorite()">
+          <mat-icon>star</mat-icon>
+        </button>
+    </eco-fab-speed-dial-trigger>
+
+    <eco-fab-speed-dial-actions>
+      <button
+        mat-mini-fab
+        color="warn"
+        matTooltip="Delete Project">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </eco-fab-speed-dial-actions>
+  </eco-fab-speed-dial>
+</div>
+
+<bl-new-task
+[selectedProject]="project?.id"
+></bl-new-task>
+
+<div class="task-list">
+  <bl-task-list-item
+    *ngFor="let task of tasks | completedTask:false"
+    [task]="task"
+    [project]="project"
+    [showCompleted]="false"
+  ></bl-task-list-item>
+
+  <div class="completed-header">Completed Tasks</div>
+  <bl-task-list-item
+    *ngFor="let task of tasks | completedTask:true"
+    [task]="task"
+    [project]="project"
+    [showCompleted]="true"
+  ></bl-task-list-item>
+</div>

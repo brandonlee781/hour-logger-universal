@@ -1,0 +1,15 @@
+# A single "Don't be a..." phrase
+type DontBeA {
+  # UUID of phrase
+  id: ID!
+  # The actual phrase
+  phrase: String
+  # The season and episode the phrase is from
+  episodeNo: String
+  # The title of the episode the phrase is from
+  episodeTitle: String
+  # Timestamp log entry was added to database
+  createdAt: String
+  # Timestamp log entry was last modified in database
+  updatedAt: String
+}

@@ -1,0 +1,59 @@
+@import 'variables';
+@import 'mixins';
+
+.mat-drawer-container {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100vh;
+  width: calc(100vw - 126px);
+  overflow: hidden;
+  background: #fff;
+
+  @include mobile-and-down {
+    width: 100vw;
+  }
+}
+
+.base-drawer {
+  width: 378px;
+  min-width: 378px;
+  background-color: $primary;
+
+  @include mobile-and-down {
+    margin-bottom: 4em;
+  }
+}
+
+.drawer-header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  height: $sidenav-width;
+  min-height: $sidenav-width;
+  width: calc(378px - 4rem);
+  padding: 0 2rem;
+  margin: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 2.15rem;
+  font-weight: 100;
+  color: #fff;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+}
+
+.link-list {
+  padding-top: 0;
+}
+
+.mat-drawer-content {
+  flex: 1 1 auto;
+  height: 100vh;
+}
+
+.spinner {
+  margin: 40px auto;
+}
+
+/deep/ .drawer-spinner .mat-progress-spinner circle {
+  stroke: #fff;
+}

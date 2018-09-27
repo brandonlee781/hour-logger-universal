@@ -1,0 +1,25 @@
+<div class="log-wrapper">
+  <bl-nav-drawer #drawer [loading]="loading">
+
+    <div class="nav-header">
+      <span>Log Entries</span>
+      <button mat-button (click)="onToggleCalendar()">
+        <span class="mat-body-1">View</span>
+        <mat-icon>{{ currentView === 'list' ? 'event' : 'list' }}</mat-icon>
+      </button>
+    </div>
+
+    <div *ngIf="!loading" class="nav-links">
+      <bl-nav-drawer-link [link]="{ path:'/logs', text: 'Recent Log Entries', route: '' }"></bl-nav-drawer-link>
+      <bl-nav-drawer-link
+        *ngFor="let link of links"
+        [link]="link"
+      ></bl-nav-drawer-link>
+    </div>
+
+    <div class="log-content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </bl-nav-drawer>
+</div>

@@ -1,0 +1,80 @@
+<div 
+  fxLayout="row" 
+  fxLayoutAlign="space-between center" 
+  class="calendar-header">
+  <div 
+    fxLayout="row" 
+    fxLayoutAlign="space-between center" 
+    class="date-nav-buttons">
+    <button
+      mat-button
+      mwlCalendarToday
+      [(viewDate)]="viewDate">
+      Today
+    </button>
+    <button
+      mat-icon-button
+      mwlCalendarPreviousView
+      [view]="view"
+      [(viewDate)]="viewDate"
+      (viewDateChange)="activeDayIsOpen = false">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      mwlCalendarNextView
+      [view]="view"
+      [(viewDate)]="viewDate"
+      (viewDateChange)="activeDayIsOpen = false">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  </div>
+
+  <div class="date-view-buttons">
+    <button
+      mat-button
+      (click)="view = 'month'"
+      [class.active]="view === 'month'">
+      Month
+    </button>
+    <button
+      mat-button
+      (click)="view = 'week'"
+      [class.active]="view === 'week'">
+      Week
+    </button>
+    <button
+      mat-button
+      (click)="view = 'day'"
+      [class.active]="view === 'day'">
+      Day
+    </button>
+  </div>
+</div>
+
+<div [ngSwitch]="view" class="calendar-view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="'month'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [activeDayIsOpen]="activeDayIsOpen"
+    [refresh]="refresh"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent($event.event)">
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="'week'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent($event.event)">
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent($event.event)">
+  </mwl-calendar-day-view>
+</div>

@@ -1,0 +1,14 @@
+@import 'mixins';
+
+.router {
+  width: calc(100vw - 125.59px);
+  height: 100vh;
+
+  @include mobile-and-down {
+    width: 100%;
+  }
+
+  @include tablet-and-up {
+    margin-left: $sidenav-width;
+  }
+}

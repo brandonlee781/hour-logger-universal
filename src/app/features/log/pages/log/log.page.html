@@ -1,0 +1,48 @@
+<div class="log-header">
+  <div class="log-header__title">{{ project?.name || 'Recent Log Entries' }}</div>
+
+  <eco-fab-speed-dial
+    #logFab
+    [(open)]="open"
+    direction="left"
+    animationMode="fling"
+    [fixed]="true"
+    (mouseenter)="logFab.open = true"
+    (mouseleave)="logFab.open = false">
+    <eco-fab-speed-dial-trigger>
+      <button mat-fab (click)="openDialog(project?.id)" color="primary" matTooltip="Create Log Entry">
+        <mat-icon>add</mat-icon>
+      </button>
+    </eco-fab-speed-dial-trigger>
+    <eco-fab-speed-dial-actions>
+
+      <!-- <button
+        mat-mini-fab
+        color="accent"
+        matTooltip="Begin Recording Time">
+        <mat-icon>timelapse</mat-icon>
+      </button> -->
+    </eco-fab-speed-dial-actions>
+  </eco-fab-speed-dial>
+</div>
+
+<mat-progress-spinner
+  *ngIf="loading"
+  color="primary"
+  class="spinner"
+  mode="indeterminate">
+</mat-progress-spinner>
+
+<bl-log-list
+  [selectedProject]="project?.id"
+  [hidden]="currentView === 'calendar'"
+  [logs]="logs"
+  [loading]="loading"
+  (editLog)="editLog($event)"
+  (newLog)="openDialog($event)"
+  (loadMore)="loadMoreLogs()">
+</bl-log-list>
+<bl-log-calendar
+  [hidden]="currentView === 'list'"
+  (editLog)="editLog($event)">
+</bl-log-calendar>

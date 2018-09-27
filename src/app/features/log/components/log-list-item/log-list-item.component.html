@@ -1,0 +1,46 @@
+<div class="list-item">
+  <div class="log-entry">
+    <div class="log-data">
+      <div class="log-note">{{ log.note }}</div>
+      <div class="log-project log-detail" matTooltip="Project" matTooltipShowDelay="1000">
+        <mat-icon>folder_open</mat-icon>
+        <span class="detail-value">{{ log.project.name }}</span>
+      </div>
+
+      <div class="log-date-mobile log-detail">
+        <mat-icon>event</mat-icon>
+        <span class="detail-value">{{ log.start | date:'E HH:mm' }}-{{ log.end | date:'HH:mm' }}</span>
+      </div>
+
+      <div class="log-date log-detail" matTooltip="Date" matTooltipShowDelay="1000">
+        <mat-icon>event</mat-icon>
+        <span class="detail-value">{{ log.start | date:'E, MMM d' }}</span>
+      </div>
+
+      <div class="log-start log-detail" matTooltip="Start Time" matTooltipShowDelay="1000">
+        <mat-icon>access_time</mat-icon>
+        <span class="detail-value">{{ log.start | date:'shortTime' }}</span>
+      </div>
+
+      <div class="log-end log-detail" matTooltip="End Time" matTooltipShowDelay="1000">
+        <mat-icon>access_time</mat-icon>
+        <span class="detail-value">{{ log.end | date:'shortTime' }}</span>
+      </div>
+
+      <div class="log-duration log-detail" matTooltip="Duration" matTooltipShowDelay="1000">
+        <mat-icon>timelapse</mat-icon>
+        <span class="detail-value">{{ log.duration }}</span>
+      </div>
+    </div>
+
+    <div *ngIf="!confirmDelete" class="list-item-buttons" fxLayout="row">
+      <button mat-icon-button color="primary" (click)="onEditClick()"><mat-icon>mode_edit</mat-icon></button>
+      <button mat-icon-button color="warn" (click)="handleDelete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <button *ngIf="confirmDelete" mat-button color="warn" (click)="deleteLog()">
+      Confirm? <mat-icon color="white">delete</mat-icon>
+    </button>
+  </div>
+</div>

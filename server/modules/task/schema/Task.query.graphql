@@ -1,0 +1,26 @@
+type Query {
+  allTasks(options: QueryOptions): AllTasksPayload!
+  projectTasks(input: ProjectTasksInput!, options: QueryOptions): ProjectTasksPayload!
+  allProjectTasks(input: ProjectTasksInput!, options: QueryOptions): ProjectTasksPayload!
+  oneTask(input: OneTaskInput!): OneTaskPayload!
+}
+
+type AllTasksPayload {
+  tasks: [Task!]!
+}
+
+input ProjectTasksInput {
+  project: String
+}
+
+type ProjectTasksPayload {
+  tasks: [Task!]!
+}
+
+input OneTaskInput {
+  id: String!
+}
+
+type OneTaskPayload {
+  task: Task!
+}

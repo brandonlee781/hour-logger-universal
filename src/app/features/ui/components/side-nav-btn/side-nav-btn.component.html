@@ -1,0 +1,15 @@
+<button
+  *ngIf="link"
+  mat-flat-button
+  class="sidenav-btn"
+  routerLink="{{ link }}"
+  routerLinkActive="active"
+>
+  <mat-icon class="sidenav-btn-icon">{{ icon }}</mat-icon>
+  <span class="sidenav-btn-label">{{ label }}</span>
+</button>
+
+<button *ngIf="!link" mat-flat-button class="sidenav-btn">
+  <mat-icon class="sidenav-btn-icon">{{ icon }}</mat-icon>
+  <span class="sidenav-btn-label">{{ label }}</span>
+</button>

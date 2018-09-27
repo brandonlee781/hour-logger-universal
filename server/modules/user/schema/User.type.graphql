@@ -1,0 +1,22 @@
+type User {
+  id: String!
+  email: String!
+  address: String
+  city: String
+  state: String
+  zip: String
+}
+
+type SigninPayload {
+  token: String
+  user: User
+}
+
+input AuthProviderSignupData {
+  email: AUTH_PROVIDER_EMAIL
+}
+
+input AUTH_PROVIDER_EMAIL {
+  email: String!
+  password: String!
+}

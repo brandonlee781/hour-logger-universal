@@ -1,0 +1,12 @@
+<div class="new-project-form">
+  <mat-form-field class="new-project-field">
+    <input matInput #projectInput placeholder="Project Name" id="new-project-input">
+  </mat-form-field>
+
+  <button mat-icon-button (click)="addProject(projectInput.value)" class="add-project-btn">
+    <mat-icon>check</mat-icon>
+  </button>
+  <button mat-icon-button (click)="close.emit()" class="add-project-btn">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>

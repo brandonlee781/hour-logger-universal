@@ -1,0 +1,62 @@
+@import 'variables';
+@import 'mixins';;
+
+.sidenav-btn {
+  width: $sidenav-width;
+  min-width: $sidenav-width;
+  height: $sidenav-width;
+  border-radius: 0;
+  margin: 0;
+  background-color: $dark-grey;
+  color: $text-color;
+
+  span {
+    display: flex !important;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.active {
+    color: map-get($logger-blue, 500) !important;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: calc(50% - 10px);
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 10px solid $primary;
+    }
+  }
+
+  @include mobile-and-down {
+    height: $sidenav-width * 0.5;
+    width: 20vw;
+    min-width: 20vw;
+    padding: 0;
+
+    &.active {
+      &::after {
+        border: 0;
+      }
+    }
+  }
+}
+
+.sidenav-btn-icon {
+  font-size: 2.5em;
+  height: 1em;
+  width: 1em;
+
+  @include mobile-and-down {
+    font-size: 2em;
+  }
+}
+
+.sidenav-btn-label {
+  font-size: 1em;
+  height: 18px;
+  font-weight: 400;
+}
