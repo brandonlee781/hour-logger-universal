@@ -29,7 +29,6 @@ export class GraphQLModule {
         // get the authentication token from local storage if it exists
         token = JSON.parse(window.localStorage.getItem('token'));
       }
-      console.log(token);
       // return the headers to the context so httpLink can read them
       // in this example we assume headers property exists
       // and it is an instance of HttpHeaders

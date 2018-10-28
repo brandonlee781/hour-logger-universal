@@ -1,7 +1,9 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { InfiniteScrollService } from '@features/ui/services/infinite-scroll.service';
 import { NavDrawerService } from '@shared/services/nav-drawer.service';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'bl-nav-drawer',
@@ -10,55 +12,41 @@ import { NavDrawerService } from '@shared/services/nav-drawer.service';
 })
 export class NavDrawerComponent implements OnInit {
   @Input() links;
-  @Input() loading: boolean;
   @Input() headerTitle: string;
-  @Input() headerIcon: string;
-  @Output() headerAction: EventEmitter<any> = new EventEmitter();
-  @Output() selected: EventEmitter<any> = new EventEmitter();
-  isDesktop: boolean;
-  isOpened: boolean;
+  defaultTitle: string;
+  @Input() loading: boolean;
+  @ViewChild('wrapper') drawerWrapper: ElementRef;
+  contentPosition: any;
+  isOpened = false;
 
   constructor(
     public breakpointObserver: BreakpointObserver,
-    private navDrawerService: NavDrawerService,
-    private infiniteScrollService: InfiniteScrollService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
   ) {
-    navDrawerService.isNavDrawerOpen$.subscribe(isOpened => {
-      this.isOpened = isOpened;
-    });
+    iconRegistry.addSvgIcon(
+      'hamburger',
+      sanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/cheese-burger.svg'),
+    );
   }
 
   ngOnInit() {
-    this.breakpointObserver
-      .observe([Breakpoints.Large, Breakpoints.XLarge])
-      .subscribe((state: BreakpointState) => {
-        if (state.matches) {
-          this.isDesktop = true;
-          this.isOpened = true;
-        } else {
-          this.isDesktop = false;
-          this.isOpened = false;
-        }
-        this.navDrawerService.setValue(this.isDesktop);
-      });
+    this.defaultTitle = this.headerTitle;
   }
 
   toggleDrawer() {
-    this.navDrawerService.setValue(!this.isOpened);
-  }
-
-  changeSelected(link) {
-    this.selected.emit(link);
-    if (!this.isDesktop) {
-      this.toggleDrawer();
+    const offsetHeight = this.drawerWrapper.nativeElement.offsetHeight;
+    const openHeight = 100;
+    this.isOpened = !this.isOpened;
+    if (this.isOpened) {
+      this.contentPosition = {
+        top: (offsetHeight - openHeight) + 'px',
+        height: openHeight + 'px',
+      };
+    } else {
+      this.contentPosition = {
+        top: '48px',
+      };
     }
-  }
-
-  headerButtonClicked() {
-    this.headerAction.emit();
-  }
-
-  onScroll() {
-    this.infiniteScrollService.announceScroll('scrolled');
   }
 }

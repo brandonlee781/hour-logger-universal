@@ -21,6 +21,7 @@ import {
   InfiniteScrollLoadingSnackbarComponent
 } from '@features/ui/components/infinite-scroll-loading-snackbar/infinite-scroll-loading-snackbar.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DateSuffixPipe } from './pipes/date-suffix.pipe';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     LogPage,
     LogsPage,
     NewLogDialogComponent,
+    DateSuffixPipe,
   ],
   providers: [Apollo, MatIconRegistry, MatSnackBar, LogViewService],
   entryComponents: [NewLogDialogComponent, MatSnackBarContainer, InfiniteScrollLoadingSnackbarComponent],

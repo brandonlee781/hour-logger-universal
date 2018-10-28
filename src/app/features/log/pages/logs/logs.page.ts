@@ -6,6 +6,7 @@ import { LogViewService } from '@features/log/services/log-view.service';
 import Project from '@features/project/Project';
 import { GET_PROJECT_NAMES } from '@features/project/schema/queries';
 import { NavDrawerService } from '@shared/services/nav-drawer.service';
+import { OpenModalService } from '@features/ui/services/open-modal.service';
 
 // tslint:disable:component-class-suffix
 
@@ -20,6 +21,7 @@ interface Link {
   text: string;
   id: string;
   path: string;
+  route: string;
 }
 
 @Component({
@@ -51,13 +53,19 @@ export class LogsPage implements OnInit {
       .valueChanges
       .subscribe(q => {
         const projects = q.data.allProjects.projects;
-        this.links = projects.map((proj: Project) => ({
+        this.links = [{
+          id: '',
+          icon: '',
+          path: '/logs',
+          text: 'Recent Log Entries',
+          route: '',
+        }].concat(projects.map((proj: Project) => ({
           icon: proj.id === '' ? '' : 'folder_open',
           path: '/logs',
           route: proj.name,
           text: proj.name,
           id: proj.id,
-        }));
+        })));
         this.loading = false;
       });
     this.breakpointObserver

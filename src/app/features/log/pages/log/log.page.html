@@ -1,4 +1,4 @@
-<div class="log-header">
+<div *ngIf="isDesktop" class="log-header">
   <div class="log-header__title">{{ project?.name || 'Recent Log Entries' }}</div>
 
   <eco-fab-speed-dial
@@ -16,12 +16,7 @@
     </eco-fab-speed-dial-trigger>
     <eco-fab-speed-dial-actions>
 
-      <!-- <button
-        mat-mini-fab
-        color="accent"
-        matTooltip="Begin Recording Time">
-        <mat-icon>timelapse</mat-icon>
-      </button> -->
+      
     </eco-fab-speed-dial-actions>
   </eco-fab-speed-dial>
 </div>

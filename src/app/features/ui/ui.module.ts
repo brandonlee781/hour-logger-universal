@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@core/material.module';
 
 import { MenuToggleButtonComponent } from './components/menu-toggle-button/menu-toggle-button.component';
-import { NavDrawerItemComponent } from './components/nav-drawer-item/nav-drawer-item.component';
 import { NavDrawerLinkComponent } from './components/nav-drawer-link/nav-drawer-link.component';
 import { NavDrawerComponent } from './components/nav-drawer/nav-drawer.component';
 import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
@@ -14,6 +13,7 @@ import { SideNavBtnComponent } from './components/side-nav-btn/side-nav-btn.comp
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { InfiniteScrollLoadingSnackbarComponent } from './components/infinite-scroll-loading-snackbar/infinite-scroll-loading-snackbar.component';
+import { SideNavAddBtnComponent } from '@features/ui/components/side-nav-add-btn/side-nav-add-btn.component';
 
 @NgModule({
   imports: [
@@ -28,9 +28,9 @@ import { InfiniteScrollLoadingSnackbarComponent } from './components/infinite-sc
   declarations: [
     SideNavComponent,
     SideNavBtnComponent,
+    SideNavAddBtnComponent,
     MenuToggleButtonComponent,
     NavDrawerComponent,
-    NavDrawerItemComponent,
     NavDrawerLinkComponent,
     ProfileDialogComponent,
     InfiniteScrollLoadingSnackbarComponent,
@@ -38,9 +38,9 @@ import { InfiniteScrollLoadingSnackbarComponent } from './components/infinite-sc
   exports: [
     SideNavComponent,
     SideNavBtnComponent,
+    SideNavAddBtnComponent,
     MenuToggleButtonComponent,
     NavDrawerComponent,
-    NavDrawerItemComponent,
     NavDrawerLinkComponent,
   ],
   entryComponents: [ProfileDialogComponent],

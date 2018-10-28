@@ -1,16 +1,9 @@
 <div class="sidenav">
-  <button
-    mat-button
-    *ngIf="!isDesktop && router.url !== '/profile'"
-    class="toggle-menu-btn"
-    (click)="toggleMenu()"
-  >
-    <mat-icon class="menu-toggle-icon" svgIcon="hamburger"></mat-icon>
-    <span class="menu-toggle-label">Menu</span>
-  </button>
-  <bl-side-nav-btn icon="home" label="Home"></bl-side-nav-btn>
   <bl-side-nav-btn icon="timer" label="Logs" link="/logs"></bl-side-nav-btn>
   <bl-side-nav-btn icon="assignment" label="Projects" link="/projects"></bl-side-nav-btn>
+  
+  <bl-side-nav-add-btn></bl-side-nav-add-btn>
+  
   <bl-side-nav-btn icon="bar_chart" label="Reports" link="/invoices" ></bl-side-nav-btn>
   <bl-side-nav-btn *ngIf="user?.email" icon="person" label="Profile" (click)="openProfile()" class="setting-button"></bl-side-nav-btn>
   <bl-side-nav-btn *ngIf="!user?.email" icon="lock_open" label="Login" link="/login" class="setting-button"></bl-side-nav-btn>

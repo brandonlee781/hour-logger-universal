@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Apollo } from 'apollo-angular';
 import Log from '@features/log/Log';
@@ -9,6 +9,7 @@ import { LOG_LIST_QUERY, LogListQuery } from '../../schema/queries';
   selector: 'bl-log-list-item',
   templateUrl: './log-list-item.component.html',
   styleUrls: ['./log-list-item.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LogListItemComponent implements OnInit {
   @Input() log: Log;

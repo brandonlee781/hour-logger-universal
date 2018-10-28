@@ -1,5 +1,5 @@
 @import 'variables';
-@import 'mixins';;
+@import 'mixins';
 
 .sidenav {
   display: flex;
@@ -19,11 +19,12 @@
   @include mobile-and-down {
     flex-flow: row nowrap;
     justify-content: center;
-    height: $sidenav-width * 0.5;
+    height: 62px;
     width: 100vw;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
+    left: 0;
   }
 }
 

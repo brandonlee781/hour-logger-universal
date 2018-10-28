@@ -1,34 +1,52 @@
-<mat-drawer-container (backdropClick)="toggleDrawer()">
-  <mat-drawer
-    [mode]="isDesktop ? 'side' : 'over' "
-    [opened]="isOpened"
-    class="base-drawer"
+<div #wrapper class="nav-drawer-wrapper mat-primary">
+  <div class="drawer-header"
+    gdAreas="menuBtn title moduleBtn"
+    gdRows="100%"
+    gdColumns="20% 60% 20%"
   >
-    <div *ngIf="headerTitle" class="drawer-header">
-      <span>{{ headerTitle }}</span>
-      <button *ngIf="headerIcon" mat-icon-button (click)="headerButtonClicked()">
-        <mat-icon>{{ headerIcon }}</mat-icon>
-      </button>
+    <button 
+      mat-flat-button
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      gdArea="menuBtn"
+      gdGridAlign="start center"
+      color="primary"
+      (click)="toggleDrawer()"
+    >
+      <mat-icon *ngIf="!isOpened" svgIcon="hamburger"></mat-icon>
+      <span *ngIf="!isOpened">MENU</span>
+
+      <mat-icon *ngIf="isOpened" class="close-icon">close</mat-icon>
+      <span *ngIf="isOpened">CLOSE</span>
+    </button>
+
+    <span gdArea="title" gdGridAlign="center center">
+      {{ headerTitle }}
+    </span>
+
+    <div class="module-button"
+      gdArea="moduleBtn"
+      gdGridAlign="end center"
+    >
+      <ng-content select=".header-button"></ng-content>
     </div>
+  </div>
 
-    <ng-content *ngIf="!headerTitle" select=".nav-header" ngProjectAs="div"></ng-content>
+  <div class="drawer-links-wrapper">
+    <div class="drawer-links">
+      <bl-nav-drawer-link
+        *ngFor="let link of links"
+        [link]="link"
+        (click)="toggleDrawer()"
+      >
+      </bl-nav-drawer-link>
+    </div>
+  </div>
 
-    <mat-progress-spinner
-      *ngIf="loading"
-      class="spinner drawer-spinner"
-      mode="indeterminate">
-    </mat-progress-spinner>
+  <div class="content-wrapper" [ngStyle]="contentPosition" #content>
+    <div class="content mat-app-background">
+      <ng-content></ng-content>
+    </div>
+  </div>
 
-    <ng-content select=".nav-links" ngProjectAs="div"></ng-content>
-  </mat-drawer>
-
-  <mat-drawer-content
-    style="height: 100%;"
-    infinite-scroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    (scrolled)="onScroll()"
-    [scrollWindow]="false">
-    <ng-content></ng-content>
-  </mat-drawer-content>
-</mat-drawer-container>
+</div>

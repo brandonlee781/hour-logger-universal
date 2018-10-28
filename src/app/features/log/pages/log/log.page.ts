@@ -1,23 +1,23 @@
-import { map } from 'rxjs/operators';
-// tslint:disable:component-class-suffix
-
-import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { Apollo, QueryRef } from 'apollo-angular';
-import { differenceInMinutes, format } from 'date-fns';
+import { mobileDialog } from '@features/log/components/new-log-dialog/dialogOptions';
 import { NewLogDialogComponent } from '@features/log/components/new-log-dialog/new-log-dialog.component';
 import Log from '@features/log/Log';
 import { LogViewService } from '@features/log/services/log-view.service';
 import Project from '@features/project/Project';
+import { GET_PROJECT_NAMES, GetProjectNameQuery } from '@features/project/schema/queries';
 import {
-  GET_PROJECT_NAMES,
-  GetProjectNameQuery,
-} from '@features/project/schema/queries';
+  InfiniteScrollLoadingSnackbarComponent,
+} from '@features/ui/components/infinite-scroll-loading-snackbar/infinite-scroll-loading-snackbar.component';
+import { OpenModalService } from '@features/ui/services/open-modal.service';
+import { Apollo, QueryRef } from 'apollo-angular';
+import { map } from 'rxjs/operators';
 
-import { NEW_LOG, UPDATE_LOG } from '../../schema/mutations';
 import { LOG_LIST_QUERY, LogListQuery } from '../../schema/queries';
-import { InfiniteScrollLoadingSnackbarComponent } from '@features/ui/components/infinite-scroll-loading-snackbar/infinite-scroll-loading-snackbar.component';
+
+// tslint:disable:component-class-suffix
 
 interface ProjectQuery {
   allProjects: {
@@ -37,12 +37,13 @@ interface Link {
   templateUrl: './log.page.html',
   styleUrls: ['./log.page.scss'],
 })
-export class LogPage implements OnInit {
+export class LogPage implements OnInit, OnDestroy {
   logs: Log[];
   project: Project;
   logQuery: QueryRef<any>;
   isDesktop: boolean;
   open = false;
+  modalOpen: boolean;
   currentView;
   loading = false;
 
@@ -52,6 +53,8 @@ export class LogPage implements OnInit {
     private route: ActivatedRoute,
     private logViewService: LogViewService,
     private snackBar: MatSnackBar,
+    public breakpointObserver: BreakpointObserver,
+    private openModalService: OpenModalService,
   ) {
     this.route.params.subscribe(params => {
       this.apollo
@@ -71,6 +74,24 @@ export class LogPage implements OnInit {
     this.logViewService.view$.subscribe(v => {
       this.currentView = v;
     });
+    this.openModalService.open$.subscribe(open => {
+      if (open && !this.modalOpen) {
+        this.openDialog(this.project ? this.project.id : '');
+      }
+    });
+    this.dialog.afterAllClosed.subscribe(closed => {
+      this.modalOpen = false;
+      this.openModalService.toggleOpen('closed');
+    });
+    this.breakpointObserver
+      .observe([Breakpoints.Large, Breakpoints.XLarge])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.isDesktop = true;
+        } else {
+          this.isDesktop = false;
+        }
+      });
   }
 
   getLogs(id = null) {
@@ -117,16 +138,24 @@ export class LogPage implements OnInit {
    * closes perform a mutation on the log list
    */
   openDialog(projectId): void {
-    const createLogDialog = this.dialog.open(NewLogDialogComponent, {
-      panelClass: 'new-log-dialog',
-      data: { header: 'New Log Entry', projectId },
-    });
+    const options = Object.assign({},
+      this.isDesktop ? {} : mobileDialog,
+      { data: { header: 'New Log Entry', projectId } }
+    );
+    this.modalOpen = true;
+    const createLogDialog = this.dialog.open(NewLogDialogComponent, options);
   }
 
   editLog(log: Log): void {
-    const editLogDialog = this.dialog.open(NewLogDialogComponent, {
-      panelClass: 'new-log-dialog',
-      data: { header: 'Edit Log Entry', ...log },
-    });
+    const options = Object.assign({},
+      this.isDesktop ? {} : mobileDialog,
+      { data: { header: 'Edit Log Entry', ...log } }
+    );
+    this.modalOpen = true;
+    const editLogDialog = this.dialog.open(NewLogDialogComponent, options);
+  }
+
+  ngOnDestroy() {
+    this.breakpointObserver.ngOnDestroy();
   }
 }

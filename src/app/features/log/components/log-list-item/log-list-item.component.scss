@@ -31,7 +31,7 @@
 
 .log-data {
   display: grid;
-  grid-template-rows: 1.5rem 1.5rem;
+  grid-template-rows: 1.5rem 1.7rem;
   grid-template-columns: 150px 110px 95px 95px 50px;
 
   @include tablet-and-down {
@@ -43,7 +43,7 @@
   }
 
   @include mobile-and-down {
-    grid-template-columns: 150px 150px;
+    grid-template-columns: 125px 90px 90px;
   }
 }
 
@@ -54,7 +54,6 @@
   font-size: 1.1rem;
   font-weight: 400;
   letter-spacing: 0.4px;
-  margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -64,12 +63,14 @@
   }
 }
 
+
+
 .log-detail {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  color: rgba(0, 0, 0, 0.54);
+  // color: rgba(0, 0, 0, 0.54);
   font-size: 14px;
   line-height: 1.5;
   white-space: nowrap;
@@ -89,6 +90,14 @@
 .log-project {
   grid-row: 2 / span 1;
   grid-column: 1 / span 1;
+
+  @include mobile-and-down {
+    .detail-value {
+      width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis !important;
+    }
+  }
 }
 
 .log-date {
@@ -140,7 +149,7 @@
   }
 
   @include mobile-and-down {
-    display: none;
+    grid-column: 3 / span 1;
   }
 }
 
@@ -155,3 +164,25 @@
 .list-item-buttons {
   width: 84px;
 }
+
+.delete-warn-button {
+  @include mobile-and-down {
+    padding: 0;
+
+    .mat-icon {
+      display: none;
+    }
+  }
+}
+
+.dark-theme {
+  .log-entry {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  
+  .log-note,
+  .log-detail {
+    color: $dark-theme-text-color;
+  }
+}
+

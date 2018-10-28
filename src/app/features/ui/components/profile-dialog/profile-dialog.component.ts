@@ -45,7 +45,6 @@ export class ProfileDialogComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    console.log(this.updateUserForm.controls.password);
     this.apollo
       .watchQuery<GetUserQuery>({ query: GET_USER })
       .valueChanges

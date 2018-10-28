@@ -75,7 +75,7 @@
       <mat-error *ngIf="newLogForm?.errors?.tasks">
           {{ newLogForm.errors.tasks }}
       </mat-error>
-      <mat-hint *ngIf="!projectSelect.value">You must select a project before you can select any tasks</mat-hint>
+      <mat-hint *ngIf="!projectSelect.value">Select a project before selecting tasks</mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="fill" [hideRequiredMarker]="true" class="notes-field">

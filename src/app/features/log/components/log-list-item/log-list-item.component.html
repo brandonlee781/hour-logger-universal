@@ -9,7 +9,7 @@
 
       <div class="log-date-mobile log-detail">
         <mat-icon>event</mat-icon>
-        <span class="detail-value">{{ log.start | date:'E HH:mm' }}-{{ log.end | date:'HH:mm' }}</span>
+        <span class="detail-value">{{ (log.start | date:'E d') | dateSuffix }}</span>
       </div>
 
       <div class="log-date log-detail" matTooltip="Date" matTooltipShowDelay="1000">
@@ -33,13 +33,13 @@
       </div>
     </div>
 
-    <div *ngIf="!confirmDelete" class="list-item-buttons" fxLayout="row">
+    <div *ngIf="!confirmDelete" class="list-item-buttons" fxLayout="row" fxLayoutAlign="space-between center">
       <button mat-icon-button color="primary" (click)="onEditClick()"><mat-icon>mode_edit</mat-icon></button>
       <button mat-icon-button color="warn" (click)="handleDelete()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
-    <button *ngIf="confirmDelete" mat-button color="warn" (click)="deleteLog()">
+    <button *ngIf="confirmDelete" class="delete-warn-button" mat-button color="warn" (click)="deleteLog()">
       Confirm? <mat-icon color="white">delete</mat-icon>
     </button>
   </div>

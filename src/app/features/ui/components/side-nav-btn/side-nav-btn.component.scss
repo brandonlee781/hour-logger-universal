@@ -7,8 +7,8 @@
   height: $sidenav-width;
   border-radius: 0;
   margin: 0;
-  background-color: $dark-grey;
-  color: $text-color;
+  background-color: $dark-grey !important;
+  color: $text-color !important;
 
   span {
     display: flex !important;
